@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Control de empleados</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div th:insert="commons/navbar.html :: header"></div>
+	<div class="container">
+		<section class="py-4 mb-4 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="d-grid col-md-3">
+                        <a href="#" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#addEmployee">
+                            <i class="fas fa-plus"></i> Agregar Cliente
+                        </a>
+                        <div th:insert="./add_employee.html :: div"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		<table class="table">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nombre</th>
+					<th scope="col">Fecha de contratación</th>
+					<th scope="col">Departamento</th>
+					<th scope="col">&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee,iterator: ${employees}" >
+					<td th:text="${iterator.count}"></td>
+					<td th:text="${employee.firstName} + ' ' +${employee.lastName}"></td>
+					<td th:text="${employee.hireDate}"></td>
+					<td th:text="${employee.departmentId}"></td>
+					<td><button class="btn btn-info"><i class="fas fa-edit">	</i></button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+</body>
+</html>
