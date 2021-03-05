@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.indra.bbva.model.EmployeeBean;
@@ -48,17 +48,45 @@ public class IndexController {
 	}
 
 	@PostMapping("/guardar")
-	public String guardar(EmployeeBean employee, BindingResult result, Model model) {
+	public String guardar(EmployeeBean employee) {
 		LOG.info(employee.toString());
-		if (employeeService.saveEmployee(employee))
-			return "redirect:/";
-		else
-			return "commons/error";
+		if (employee.getEmployeeId() == null) {
+			if (employeeService.saveEmployee(employee))
+				return "redirect:/";
+			else
+				return "commons/error";
+		} else {
+			if (employeeService.updateEmployee(employee))
+				return "redirect:/";
+			else
+				return "commons/error";
+		}
 	}
 
-	@InitBinder
+	@GetMapping("/editar/{id}")
+	public String editar(@PathVariable("id") Integer employeeId) {
+		return "employees/edit_employee";
+	}
+
+	@GetMapping("/{id}")
+	public String detalles(@PathVariable("id") Integer employeeId, Model model) {
+		model.addAttribute("employee", employeeService.findEmployeeByid(new EmployeeBean(employeeId)));
+		return "employees/details_employee";
+	}
+
+	@GetMapping("/eliminar/{id}")
+	public String eliminar(@PathVariable("id") Integer employeeId) {
+		if (employeeService.deleteEmployee(new EmployeeBean(employeeId))) {
+			return "redirect:/";
+		} else {
+			return "commons/error";
+		}
+	}
+
+	@InitBinder()
 	public void initBinder(WebDataBinder webDataBinder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		dateFormat.setLenient(false);
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 }

@@ -3,6 +3,7 @@ package com.indra.bbva.service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import com.indra.bbva.model.DepartmentBean;
 import com.indra.bbva.model.EmployeeBean;
 
 public interface EmployeeService {
@@ -15,4 +16,6 @@ public interface EmployeeService {
 	boolean updateEmployee(EmployeeBean employee);
 
 	boolean deleteEmployee(EmployeeBean employee);
+
+	List<EmployeeBean> getEmployeesByDepartment(DepartmentBean departmentId) throws NoSuchElementException;
 }

@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.indra.bbva.model.DepartmentBean;
 import com.indra.bbva.model.EmployeeBean;
 import com.indra.bbva.repository.EmployeeRepository;
 import com.indra.bbva.service.EmployeeService;
@@ -86,4 +87,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 	}
 
+	@Override
+	public List<EmployeeBean> getEmployeesByDepartment(DepartmentBean departmentId) throws NoSuchElementException {
+		try {
+			return employeeRepository.findByDepartment(departmentId);
+		} catch (Exception e) {
+			System.out.println("Error al listar los registros");
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

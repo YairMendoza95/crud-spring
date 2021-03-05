@@ -30,8 +30,16 @@
 								<input type="date" class="form-control" id="hireDate" name="hireDate">
 							</div>
 							<div class="col-md-4">
-								<label for="salary" class="form-label">Sueldo:</label> 
-								<input type="text" class="form-control" id="salary" name="salary">
+								<label for="salary" class="form-label">Salario:</label>
+								<div class="input-group mb-3">
+  									<div class="input-group-prepend">
+    									<span class="input-group-text">$</span>
+  									</div>
+  									<input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="salary" name="salary">
+  									<div class="input-group-append">
+    									<span class="input-group-text">.00</span>
+  									</div>
+								</div>
 							</div>
 							<div class="col-md-4">
 								<label for="commissionPct" class="form-label">Comisi&oacuten:</label> 
@@ -39,7 +47,7 @@
 							</div>
 							<div class="col-md-4">
 								<label for="jobId" class="form-label">Trabajo:</label> 
-								<select id="jobId" class="form-control" name="jobId">
+								<select id="job" class="form-control" name="job.jobId}">
 									<option th:each="job:${jobs}" th:text="${job.jobTitle}" th:value="${job.jobId}"></option>
 								</select>
 							</div>
@@ -52,8 +60,8 @@
 							</div>
 							<div class="col-md-4">
 								<label for="departmentId" class="form-label">Departamento:</label> 
-								<select id="departmentId" class="form-control" name="deparmentId">
-									<option th:each="department: ${departments}" th:text="${department.departmentName}" th:value="${department.departmentId}"></option>
+								<select id="department" class="form-control" name="department">
+									<option th:each="department: ${departments}" th:text="${department.departmentName==null}? '-':${department.departmentName}" th:value="${department.departmentId}"></option>
 								</select>
 							</div>
 						</div>

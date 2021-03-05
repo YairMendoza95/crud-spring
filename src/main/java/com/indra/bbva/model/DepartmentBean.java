@@ -14,7 +14,7 @@ public class DepartmentBean {
 	@GeneratedValue(generator = "seq")
 	@SequenceGenerator(name = "seq", sequenceName = "DEPARTMENTS_SEQ", allocationSize = 10)
 	@Column(name = "DEPARTMENT_ID")
-	private int departmentId;
+	private Integer departmentId;
 
 	@Column(name = "DEPARTMENT_NAME")
 	private String departmentName;
