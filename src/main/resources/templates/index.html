@@ -8,15 +8,14 @@
 		<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div th:insert="commons/navbar.html :: nav"></div>
+	<div th:insert="commons/navbar.html :: div"></div>
 	<div class="container mt-3">
 	
-		<h4 sec:authorize="nombreusuario"></h4>
 		<section class="py-4 mb-4 bg-light">
             <div class="container">
                 <div class="row">
                     <div class="d-grid col-md-3">
-                        <a href="#" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#addEmployee">
+                        <a href="#" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#addEmployee" >
                             <i class="fas fa-plus"></i> Agregar empleado
                         </a>
                         <div th:insert="./employees/add_employee.html :: div"></div>
