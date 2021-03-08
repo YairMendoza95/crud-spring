@@ -2,6 +2,7 @@ package com.indra.bbva.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class EmployeeBean {
 	@GeneratedValue(generator = "secuenciaPrueba")
 	@SequenceGenerator(name = "secuenciaPrueba", sequenceName = "EMPLOYEES_SEQ", allocationSize = 1)
 	@Column(name = "EMPLOYEE_ID")
-	private Integer employeeId;
+	private int employeeId;
 
 	@Column(name = "FIRST_NAME")
 	private String firstName;
@@ -38,11 +39,8 @@ public class EmployeeBean {
 	@Temporal(TemporalType.DATE)
 	private Date hireDate;
 
-	@Column(name = "JOB_ID")
-	private String jobId;
-
 	@ManyToOne
-	@JoinColumn(name = "JOB_ID", nullable = false, updatable = false, insertable = false)
+	@JoinColumn(name = "JOB_ID", nullable = false)
 	private JobBean job;
 
 	@Column(name = "SALARY")
@@ -53,18 +51,18 @@ public class EmployeeBean {
 
 	@Column(name = "MANAGER_ID")
 	private Integer managerId;
+	/*
+	 * @Column(name = "DEPARTMENT_ID") private Integer departmentId;
+	 */
 
-	@Column(name = "DEPARTMENT_ID")
-	private Integer departmentId;
-
-	@ManyToOne
-	@JoinColumn(name = "DEPARTMENT_ID", nullable = false, updatable = false, insertable = false)
+	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "DEPARTMENT_ID", nullable = true)
 	private DepartmentBean department;
 
 	public EmployeeBean() {
 	}
 
-	public EmployeeBean(Integer employeeId) {
+	public EmployeeBean(int employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -82,7 +80,7 @@ public class EmployeeBean {
 		this.department = department;
 	}
 
-	public EmployeeBean(Integer employeeId, String firstName, String lastName, String email, String phoneNumber,
+	public EmployeeBean(int employeeId, String firstName, String lastName, String email, String phoneNumber,
 			Date hireDate, JobBean job, Double salary, Double commissionPct, Integer managerId,
 			DepartmentBean department) {
 		this.employeeId = employeeId;
@@ -98,11 +96,11 @@ public class EmployeeBean {
 		this.department = department;
 	}
 
-	public Integer getEmployeeId() {
+	public int getEmployeeId() {
 		return employeeId;
 	}
 
-	public void setEmployeeId(Integer employeeId) {
+	public void setEmployeeId(int employeeId) {
 		this.employeeId = employeeId;
 	}
 
@@ -154,22 +152,6 @@ public class EmployeeBean {
 		this.job = job;
 	}
 
-	public String getJobId() {
-		return jobId;
-	}
-
-	public void setJobId(String jobId) {
-		this.jobId = jobId;
-	}
-
-	public Integer getDepartmentId() {
-		return departmentId;
-	}
-
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
-
 	public Double getSalary() {
 		return salary;
 	}
@@ -198,15 +180,16 @@ public class EmployeeBean {
 		return department;
 	}
 
-	public void setDepartmentId(DepartmentBean department) {
+	public void setDepartment(DepartmentBean department) {
 		this.department = department;
 	}
 
 	@Override
 	public String toString() {
-		return "Employees:  [ employeeId: " + employeeId + ", firstName: " + firstName + ", lastName: " + lastName
-				+ ", email: " + email + ", phoneNumber: " + phoneNumber + ", hireDate: " + hireDate + ", jobId: "
-				+ jobId + ", salary: " + salary + ", commissionPct: " + commissionPct + ", managerId: " + managerId
-				+ ", departmentId: " + departmentId + " ]";
+		return "EmployeeBean [employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", phoneNumber=" + phoneNumber + ", hireDate=" + hireDate + ", job=" + job
+				+ ", salary=" + salary + ", commissionPct=" + commissionPct + ", managerId=" + managerId
+				+ ", department=" + department + "]";
 	}
+
 }

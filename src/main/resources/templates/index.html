@@ -40,7 +40,7 @@
 					<td th:text="${emp.department != null} ? ${emp.department.departmentName} : 'Sin departamento'"></td>
 					<td>
 						<a th:href="@{/editar/{id}(id=${emp.employeeId})}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
-						<a th:href="@{/{id}(id=${emp.employeeId})}" class="btn btn-warning mr-2"><i class="fas fa-info"></i></a>
+						<a th:href="@{/{id}(id=${emp.employeeId})}" class="btn btn-warning mr-2"><i class="fas fa-info-circle"></i></a>
 						<a th:href="@{/eliminar/{id}(id=${emp.employeeId})}" class="btn btn-danger mr-2"><i class="fas fa-trash"></i></a>
 					</td>
 				</tr>

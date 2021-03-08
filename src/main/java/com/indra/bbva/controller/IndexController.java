@@ -49,18 +49,12 @@ public class IndexController {
 
 	@PostMapping("/guardar")
 	public String guardar(EmployeeBean employee) {
+		LOG.info(employee.getJob().toString());
 		LOG.info(employee.toString());
-		if (employee.getEmployeeId() == null) {
-			if (employeeService.saveEmployee(employee))
-				return "redirect:/";
-			else
-				return "commons/error";
-		} else {
-			if (employeeService.updateEmployee(employee))
-				return "redirect:/";
-			else
-				return "commons/error";
-		}
+		if (employeeService.saveEmployee(employee))
+			return "redirect:/";
+		else
+			return "commons/error";
 	}
 
 	@GetMapping("/editar/{id}")

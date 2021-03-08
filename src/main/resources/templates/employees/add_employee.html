@@ -46,9 +46,9 @@
 								<input type="text" class="form-control" id="commissionPct" name="commissionPct">
 							</div>
 							<div class="col-md-4">
-								<label for="jobId" class="form-label">Trabajo:</label> 
-								<select id="job" class="form-control" name="job.jobId}">
-									<option th:each="job:${jobs}" th:text="${job.jobTitle}" th:value="${job.jobId}"></option>
+								<label for="job" class="form-label">Trabajo:</label> 
+								<select id="job" class="form-control" name="job">
+									<option th:each="job: ${jobs}" th:text="${job.jobTitle}" th:value="${job.jobId}"></option>
 								</select>
 							</div>
 							<div class="col-md-4">
