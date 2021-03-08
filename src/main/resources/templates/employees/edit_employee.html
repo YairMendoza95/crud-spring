@@ -1,62 +1,91 @@
-<html th:insert="commons/header.html :: html">
-<form th:action="@{/guardar}" method="POST" th:object="${employee}">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12 mb-2">
-				<label for="firstNama" class="form-label">Nombre:</label> 
-				<input type="text" class="form-control" id="firstName" name="firstName">
-			</div>
-			<div class="col-md-12 mb-2">
-				<label for="lastName" class="form-label">Apellido:</label>
-				<input type="text" class="form-control" id="lastName" name="lastName">
-			</div>
-			<div class="col-6 mb-2">
-				<label for="email" class="form-label" >Correo electr&oacutenico:</label> 
-				<input type="email" class="form-control" id="email" name="email">
-			</div>
-			<div class="col-6 mb-2">
-				<label for="phoneNumber" class="form-label" >Tel&eacutefono</label>
-				<input type="tel" class="form-control" id="phoneNumber" name="phoneNumber">
-			</div>
-			<div class="col-md-4">
-				<label for="hireDate" class="form-label">Fecha de contrataci&oacuten</label> 
-				<input type="date" class="form-control" id="hireDate" name="hireDate">
-			</div>
-			<div class="col-md-4">
-				<label for="salary" class="form-label">Salario:</label>
-				<div class="input-group mb-3">
-  					<div class="input-group-prepend">
-    					<span class="input-group-text">$</span>
-  					</div>
-  					<input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="salary" name="salary">
-  					<div class="input-group-append">
-    					<span class="input-group-text">.00</span>
-  					</div>
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Control de empleados</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div th:insert="commons/navbar.html :: header"></div>
+	<form th:action="@{/guardar}" method="POST" th:object="${employee}">
+		<div class="container">
+			<div class="card">
+				<div class="card-header col-md-12">
+					<div class="row">				
+						<div class="col-md-8">
+							<h4>Editar empleado</h4>
+						</div>
+						<div class="col-md-4">
+							<button type="submit" class="btn btn-success btn-block"><i class="fas fa-save"></i> Guardar</button>
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-12 mb-3">
+							<label for="firstNama" class="form-label">Número de empleado:</label> 
+							<input type="text" class="form-control" id="employeeId" name="employeeId" th:value="${empl.employeeId}" readonly>
+						</div>
+						<div class="col-md-12 mb-3">
+							<label for="firstNama" class="form-label">Nombre:</label> 
+							<input type="text" class="form-control" id="firstName" name="firstName" th:value="${empl.firstName}" >
+						</div>
+						<div class="col-md-12 mb-3">
+							<label for="lastName" class="form-label">Apellido:</label>
+							<input type="text" class="form-control" id="lastName" name="lastName" th:value="${empl.lastName}">
+						</div>
+						<div class="col-6 mb-3">
+							<label for="email" class="form-label" >Correo electr&oacutenico:</label> 
+							<input type="email" class="form-control" id="email" name="email" th:value="${empl.email}" >
+						</div>
+						<div class="col-6 mb-3">
+							<label for="phoneNumber" class="form-label" >Tel&eacutefono</label>
+							<input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" th:value="${empl.phoneNumber}" >
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="hireDate" class="form-label">Fecha de contrataci&oacuten</label> 
+							<input type="date" class="form-control" id="hireDate" name="hireDate" th:value="${empl.hireDate}" >
+						</div>
+						<div class="col-md-4">
+							<label for="salary" class="form-label">Salario:</label>
+							<div class="input-group mb-3">
+			  					<div class="input-group-prepend">
+			    					<span class="input-group-text">$</span>
+			  					</div>
+			  					<input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="salary" name="salary" th:value="${empl.salary}" >
+			  					<div class="input-group-append">
+			    					<span class="input-group-text">.00</span>
+			  					</div>
+							</div>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="commissionPct" class="form-label">Comisi&oacuten:</label> 
+							<input type="text" class="form-control" id="commissionPct" name="commissionPct" th:value="${empl.commissionPct}" >
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="jobId" class="form-label">Trabajo:</label> 
+							<select id="job" class="form-control" name="job.jobId">
+								<option th:each="job:${jobs}" th:text="${job.jobTitle}" th:value="${job.jobId}"></option>
+							</select>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="manegerId" class="form-label">Administrador:</label> 
+							<select id="managerId" class="form-control" name="managerId">
+								<option th:each="employee: ${employees}" th:text="${employee.firstName} + ' ' + ${employee.lastName}" th:value="${employee.employeeId}"></option>
+							</select>
+						</div>
+						<div class="col-md-4 mb-3">
+							<label for="departmentId" class="form-label">Departamento:</label> 
+							<select id="department" class="form-control" name="department">
+								<option th:each="department: ${departments}" th:text="${department.departmentName==null}? '-':${department.departmentName}" th:value="${department.departmentId}"></option>
+							</select>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<label for="commissionPct" class="form-label">Comisi&oacuten:</label> 
-				<input type="text" class="form-control" id="commissionPct" name="commissionPct">
-			</div>
-			<div class="col-md-4">
-				<label for="jobId" class="form-label">Trabajo:</label> 
-				<select id="job" class="form-control" name="job.jobId">
-					<option th:each="job:${jobs}" th:text="${job.jobTitle}" th:value="${job.jobId}"></option>
-				</select>
-			</div>
-			<div class="col-md-4">
-				<label for="manegerId" class="form-label">Administrador:</label> 
-				<select id="managerId" class="form-control" name="managerId">
-					<option th:each="employee: ${employees}" th:text="${employee.firstName} + ' ' + ${employee.lastName}" th:value="${employee.employeeId}"></option>
-				</select>
-			</div>
-			<div class="col-md-4">
-				<label for="departmentId" class="form-label">Departamento:</label> 
-				<select id="department" class="form-control" name="department">
-					<option th:each="department: ${departments}" th:text="${department.departmentName==null}? '-':${department.departmentName}" th:value="${department.departmentId}"></option>
-				</select>
-			</div>
 		</div>
-	</div>
-</form>
+	</form>
+</body>
 </html>

@@ -11,7 +11,16 @@
 	<div th:insert="/commons/navbar.html :: header"></div>
 	<section class="container">
 		<ul>
-			<li th:text="${employee.employeeId}"></li>
+			<li th:text="'N°. empleado: ' +  ${employee.employeeId}"></li>
+			<li th:text="'Nombre: ' + ${employee.firstName} + ' ' + ${employee.lastName}"></li>
+			<li th:text="'Correo corporativo: ' + ${employee.email}"></li>
+			<li th:text="'Teléfono: ' + ${employee.phoneNumber}"></li>
+			<li th:text="'Fecha de contratación: ' + ${employee.hireDate}"></li>
+			<li th:text="'Trabajo: ' + ${employee.job.jobTitle}"></li>
+			<li th:text="'Sueldo: ' + ${employee.salary}"></li>
+			<li th:text="'Comisión (%): ' + ${employee.commissionPct}"></li>
+			<li th:text="'Gerente: ' + ${gerente.firstName} + ' ' + ${gerente.lastName}"></li>
+			<li th:text="'Departamento: ' + ${employee.department.departmentName}"></li>
 		</ul>
 	</section>
 </body>

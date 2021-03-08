@@ -51,20 +51,33 @@ public class IndexController {
 	public String guardar(EmployeeBean employee) {
 		LOG.info(employee.getJob().toString());
 		LOG.info(employee.toString());
-		if (employeeService.saveEmployee(employee))
-			return "redirect:/";
-		else
-			return "commons/error";
+		if (employee.getEmployeeId() == 0) {
+			if (employeeService.saveEmployee(employee))
+				return "redirect:/";
+			else
+				return "commons/error";
+		} else {
+			if (employeeService.updateEmployee(employee))
+				return "redirect:/";
+			else
+				return "commons/error";
+		}
 	}
 
 	@GetMapping("/editar/{id}")
-	public String editar(@PathVariable("id") Integer employeeId) {
+	public String editar(@PathVariable("id") Integer employeeId, Model model) {
+		model.addAttribute("empl", employeeService.findEmployeeByid(new EmployeeBean(employeeId)));
+		model.addAttribute("jobs", jobService.getAllJobs());
+		model.addAttribute("departments", departmentService.getAllDepartments());
+		model.addAttribute("employees", employeeService.getAllEmployees());
 		return "employees/edit_employee";
 	}
 
 	@GetMapping("/{id}")
 	public String detalles(@PathVariable("id") Integer employeeId, Model model) {
-		model.addAttribute("employee", employeeService.findEmployeeByid(new EmployeeBean(employeeId)));
+		EmployeeBean employee = employeeService.findEmployeeByid(new EmployeeBean(employeeId));
+		model.addAttribute("employee", employee);
+		model.addAttribute("gerente", employeeService.findEmployeeByid(new EmployeeBean(employee.getManagerId())));
 		return "employees/details_employee";
 	}
 
