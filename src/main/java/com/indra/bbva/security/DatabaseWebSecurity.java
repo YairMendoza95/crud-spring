@@ -34,6 +34,5 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 				// login sin autorizacion/autenticacion
 				.and().formLogin().permitAll();
-
 	}
 }
