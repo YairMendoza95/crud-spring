@@ -24,20 +24,13 @@ import com.indra.bbva.service.JobService;
 public class IndexController {
 	private final static Logger LOG = LoggerFactory.getLogger(IndexController.class);
 	@Autowired
-	private final EmployeeService employeeService;
+	private EmployeeService employeeService;
 
 	@Autowired
-	private final DepartmentService departmentService;
+	private DepartmentService departmentService;
 
 	@Autowired
-	private final JobService jobService;
-
-	public IndexController(EmployeeService employeeService, DepartmentService departmentService,
-			JobService jobService) {
-		this.employeeService = employeeService;
-		this.departmentService = departmentService;
-		this.jobService = jobService;
-	}
+	private JobService jobService;
 
 	@GetMapping("/")
 	public String index(Model model) {
