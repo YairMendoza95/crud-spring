@@ -17,4 +17,9 @@ public class UsuarioController {
 		model.addAttribute("usuarios", usuarioService.getAllUsers());
 		return "users/usuarios";
 	}
+
+	@GetMapping("/usuarios/add")
+	public String agregarUsuario() {
+		retu
+	}
 }
