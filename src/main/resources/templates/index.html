@@ -6,23 +6,25 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
-		<link rel="shortcut icon" type="image/x-icon" th:href="@{/favicon.ico}">
+		<link rel="icon" type="image/x-icon" href="/statics	/favicon.ico">
 </head>
 <body>
 	<div th:insert="commons/navbar.html :: div"></div>
 	<div class="container mt-3">
-	
-		<section class="py-4 mb-4 bg-light">
+		<section class="py-4 mb-3 bg-light">
             <div class="container">
                 <div class="row">
+            	<h2 class="card-title col-md-9" th:inline="text">Bienvenido [[${#httpServletRequest.remoteUser}]]!</h2>
                     <div class="d-grid col-md-3">
-                        <a href="#" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#addEmployee" >
+                        <a href="#" class="btn btn-success btn-block" data-bs-toggle="modal" data-bs-target="#addEmployee" >
                             <i class="fas fa-plus"></i> Agregar empleado
                         </a>
-                        <div th:insert="./employees/add_employee.html :: div"></div>
+                        <div th:insert="./employees/add_employee.html :: div" sec:authorize="hasAuthority('ADMIN')"></div>
                     </div>
                 </div>
             </div>
+        </section>
+        <section>
         </section>
 		<table class="table">
 			<thead class="thead-dark">
