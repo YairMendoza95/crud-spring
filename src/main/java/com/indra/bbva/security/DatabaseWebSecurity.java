@@ -34,7 +34,8 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				// Recursos estaticos sin autorizacion
 				.antMatchers("/static/**", "/imagenes/**").permitAll()
 				// Vistas publicas sin autorizacion/autenticacion
-				.antMatchers("/home/index", "/home/").permitAll()
+				.antMatchers("/home/index", "/home/").permitAll().antMatchers("/guardar", "/usuarios/**")
+				.hasAnyAuthority("ADMIN", "admin", "Admin")
 				// URL que requieran autorizacion/autenticacion
 				.anyRequest().authenticated()
 				// login sin autorizacion/autenticacion
