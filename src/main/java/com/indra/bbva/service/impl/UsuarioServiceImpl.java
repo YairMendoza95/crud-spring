@@ -13,8 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.indra.bbva.model.RolBean;
 import com.indra.bbva.model.UsuarioBean;
 import com.indra.bbva.repository.UsuarioRepository;
+import com.indra.bbva.service.RolService;
 import com.indra.bbva.service.UsuarioService;
 
 @Service
@@ -22,6 +24,9 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+
+	@Autowired
+	private RolService rolService;
 
 	@Override
 	public List<UsuarioBean> getAllUsers() {
@@ -48,7 +53,14 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 	@Override
 	public boolean saveUser(UsuarioBean user) {
 		try {
+			RolBean rol;
+			if (usuarioRepository.count() > 0) {
+				rol = new RolBean(user.getNombreUsuario(), "USER");
+			} else {
+				rol = new RolBean(user.getNombreUsuario(), "ADMIN");
+			}
 			usuarioRepository.save(user);
+			rolService.saveRole(rol);
 			return true;
 		} catch (Exception e) {
 			System.out.println("Error al guardar el registro");

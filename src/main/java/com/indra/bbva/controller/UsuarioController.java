@@ -1,5 +1,7 @@
 package com.indra.bbva.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import com.indra.bbva.service.UsuarioService;
 public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
+	private final static Logger LOG = LoggerFactory.getLogger(UsuarioController.class);
 
 	@GetMapping("/usuarios")
 	public String usuarios(Model model) {
@@ -22,7 +25,16 @@ public class UsuarioController {
 
 	@PostMapping("/usuarios/nuevo")
 	public String agregarUsuario(UsuarioBean usuario) {
-
-		return "";
+		usuario.setActivo(1);
+		try {
+			if (usuarioService.saveUser(usuario))
+				return "redirect:/usuarios";
+			else {
+				return "./commons/error";
+			}
+		} catch (Exception e) {
+			return "./commons/error";
+		}
 	}
+
 }
