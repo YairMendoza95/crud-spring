@@ -1,9 +1,16 @@
 package com.indra.bbva.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.indra.bbva.model.UsuarioBean;
@@ -11,7 +18,7 @@ import com.indra.bbva.repository.UsuarioRepository;
 import com.indra.bbva.service.UsuarioService;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -82,5 +89,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		UsuarioBean user = usuarioRepository.findByNombreUsuario(username);
+		List<GrantedAuthority> roles = new ArrayList<>();
+		roles.add(new SimpleGrantedAuthority("ADMIN"));
+
+		UserDetails detail = new User(user.getNombreUsuario(), user.getClave(), roles);
+		return detail;
 	}
 }
