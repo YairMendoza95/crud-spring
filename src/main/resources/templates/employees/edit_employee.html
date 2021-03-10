@@ -8,7 +8,7 @@
 		<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div th:insert="commons/navbar.html :: header"></div>
+	<div th:insert="./commons/navbar.html :: div"></div>
 	<form th:action="@{/guardar}" method="POST" th:object="${employee}">
 		<div class="container">
 			<div class="card">

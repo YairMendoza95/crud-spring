@@ -37,13 +37,12 @@ public class IndexController {
 		model.addAttribute("departments", departmentService.getAllDepartments());
 		model.addAttribute("jobs", jobService.getAllJobs());
 		model.addAttribute("employees", employeeService.getAllEmployees());
+
 		return "index";
 	}
 
 	@PostMapping("/guardar")
 	public String guardar(EmployeeBean employee) {
-		LOG.info(employee.getJob().toString());
-		LOG.info(employee.toString());
 		if (employee.getEmployeeId() == 0) {
 			if (employeeService.saveEmployee(employee))
 				return "redirect:/";
@@ -63,6 +62,7 @@ public class IndexController {
 		model.addAttribute("jobs", jobService.getAllJobs());
 		model.addAttribute("departments", departmentService.getAllDepartments());
 		model.addAttribute("employees", employeeService.getAllEmployees());
+
 		return "employees/edit_employee";
 	}
 
@@ -70,7 +70,9 @@ public class IndexController {
 	public String detalles(@PathVariable("id") Integer employeeId, Model model) {
 		EmployeeBean employee = employeeService.findEmployeeByid(new EmployeeBean(employeeId));
 		model.addAttribute("employee", employee);
-		model.addAttribute("gerente", employeeService.findEmployeeByid(new EmployeeBean(employee.getManagerId())));
+		if (employee.getManagerId() != null)
+			model.addAttribute("gerente", employeeService.findEmployeeByid(new EmployeeBean(employee.getManagerId())));
+
 		return "employees/details_employee";
 	}
 

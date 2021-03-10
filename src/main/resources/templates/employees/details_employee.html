@@ -8,7 +8,7 @@
 		<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
 </head>
 <body>
-	<div th:insert="/commons/navbar.html :: header"></div>
+	<div th:insert="/commons/navbar.html :: div"></div>
 	<section class="container">
 		<ul>
 			<li th:text="'N°. empleado: ' +  ${employee.employeeId}"></li>
@@ -18,8 +18,8 @@
 			<li th:text="'Fecha de contratación: ' + ${employee.hireDate}"></li>
 			<li th:text="'Trabajo: ' + ${employee.job.jobTitle}"></li>
 			<li th:text="'Sueldo: ' + ${employee.salary}"></li>
-			<li th:text="'Comisión (%): ' + ${employee.commissionPct}"></li>
-			<li th:text="'Gerente: ' + ${gerente.firstName} + ' ' + ${gerente.lastName}"></li>
+			<li th:text="${employee.commissionPct != null} ? 'Comisión (%): ' + ${employee.commissionPct} : 'Comisión (%): No aplica'"></li>
+			<li th:text="${employee.managerId != null} ? 'Gerente: ' + ${gerente.firstName} + ' ' + ${gerente.lastName} : 'Gerente: No aplica'" ></li>
 			<li th:text="'Departamento: ' + ${employee.department.departmentName}"></li>
 		</ul>
 	</section>
