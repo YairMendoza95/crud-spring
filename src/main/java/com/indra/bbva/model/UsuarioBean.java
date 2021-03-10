@@ -27,6 +27,13 @@ public class UsuarioBean {
 	public UsuarioBean() {
 	}
 
+	public UsuarioBean(String nombreUsuario, String clave, String email, String telefono) {
+		this.nombreUsuario = nombreUsuario;
+		this.clave = clave;
+		this.email = email;
+		this.telefono = telefono;
+	}
+
 	public UsuarioBean(String nombreUsuario, String clave, String email, String telefono, Integer activo) {
 		this.nombreUsuario = nombreUsuario;
 		this.clave = clave;

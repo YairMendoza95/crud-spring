@@ -5,64 +5,25 @@
 				<h5 class="modal-title">Agregar empleado</h5>
 				<button class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
 			</div>
-			<form th:action="@{/guardar}" method="POST" th:object="${employee}">
+			<form th:action="@{/guardar}" method="POST" th:object="${usuario}">
 				<div class="modal-body">
 					<div class="container-fluid">
 						<div class="row">
 							<div class="col-md-12 mb-2">
-								<label for="firstNama" class="form-label">Nombre:</label> 
-								<input type="text" class="form-control" id="firstName" name="firstName">
+								<label for="firstNama" class="form-label">Nombre de usuario:</label> 
+								<input type="text" class="form-control" id="firstName" name="nombreUsuario">
 							</div>
 							<div class="col-md-12 mb-2">
-								<label for="lastName" class="form-label">Apellido:</label>
-								<input type="text" class="form-control" id="lastName" name="lastName">
+								<label for="lastName" class="form-label">Contrase&ntilde;a:</label>
+								<input type="password" class="form-control" id="lastName" name="clave">
 							</div>
 							<div class="col-6 mb-2">
-								<label for="email" class="form-label" >Correo electr&oacutenico:</label> 
+								<label for="email" class="form-label" >Correo electr&oacute;nico:</label> 
 								<input type="email" class="form-control" id="email" name="email">
 							</div>
 							<div class="col-6 mb-2">
-								<label for="phoneNumber" class="form-label" >Tel&eacutefono</label>
-								<input type="tel" class="form-control" id="phoneNumber" name="phoneNumber">
-							</div>
-							<div class="col-md-4">
-								<label for="hireDate" class="form-label">Fecha de contrataci&oacuten</label> 
-								<input type="date" class="form-control" id="hireDate" name="hireDate">
-							</div>
-							<div class="col-md-4">
-								<label for="salary" class="form-label">Salario:</label>
-								<div class="input-group mb-3">
-  									<div class="input-group-prepend">
-    									<span class="input-group-text">$</span>
-  									</div>
-  									<input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="salary" name="salary">
-  									<div class="input-group-append">
-    									<span class="input-group-text">.00</span>
-  									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<label for="commissionPct" class="form-label">Comisi&oacuten:</label> 
-								<input type="text" class="form-control" id="commissionPct" name="commissionPct">
-							</div>
-							<div class="col-md-4">
-								<label for="job" class="form-label">Trabajo:</label> 
-								<select id="job" class="form-control" name="job">
-									<option th:each="job: ${jobs}" th:text="${job.jobTitle}" th:value="${job.jobId}"></option>
-								</select>
-							</div>
-							<div class="col-md-4">
-								<label for="manegerId" class="form-label">Administrador:</label> 
-								<select id="managerId" class="form-control" name="managerId">
-									<option th:each="employee: ${employees}" 
-										th:text="${employee.firstName} + ' ' + ${employee.lastName}" th:value="${employee.employeeId}"></option>
-								</select>
-							</div>
-							<div class="col-md-4">
-								<label for="departmentId" class="form-label">Departamento:</label> 
-								<select id="department" class="form-control" name="department">
-									<option th:each="department: ${departments}" th:text="${department.departmentName==null}? '-':${department.departmentName}" th:value="${department.departmentId}"></option>
-								</select>
+								<label for="phoneNumber" class="form-label" >Tel&eacute;fono</label>
+								<input type="tel" class="form-control" id="phoneNumber" name="telefono">
 							</div>
 						</div>
 					</div>
