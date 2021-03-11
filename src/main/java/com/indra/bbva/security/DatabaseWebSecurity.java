@@ -34,11 +34,11 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 				// Recursos estaticos sin autorizacion
 				.antMatchers("/static/**", "/imagenes/**").permitAll()
 				// Vistas publicas sin autorizacion/autenticacion
-				.antMatchers("/home/index", "/home/").permitAll().antMatchers("/guardar", "/usuarios/**")
+				.antMatchers("/**").permitAll().antMatchers("/guardar", "/usuarios/**")
 				.hasAnyAuthority("ADMIN", "admin", "Admin")
 				// URL que requieran autorizacion/autenticacion
 				.anyRequest().authenticated()
 				// login sin autorizacion/autenticacion
-				.and().formLogin().permitAll();
+				.and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 	}
 }

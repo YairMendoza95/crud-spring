@@ -5,7 +5,7 @@
 	<title>Control de empleados</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
 		<link rel="icon" type="image/x-icon" href="/statics	/favicon.ico">
 </head>
 <body>
@@ -19,7 +19,7 @@
                         <a href="#" class="btn btn-success btn-block" data-bs-toggle="modal" data-bs-target="#addEmployee" >
                             <i class="fas fa-plus"></i> Agregar empleado
                         </a>
-                        <div th:insert="./employees/add_employee.html :: div" sec:authorize="hasAuthority('ADMIN')"></div>
+                        <div th:insert="./employees/add_employee.html :: div"></div>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
 					<td th:text="${emp.hireDate}"></td>
 					<td th:text="${emp.department != null} ? ${emp.department.departmentName} : 'Sin departamento'"></td>
 					<td>
-						<a th:href="@{/editar/{id}(id=${emp.employeeId})}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
+						<a th:href="@{/editar/{id}(id=${emp.employeeId})}" class="btn btn-info mr-2" ><i class="fas fa-edit"></i></a>
 						<a th:href="@{/{id}(id=${emp.employeeId})}" class="btn btn-warning mr-2"><i class="fas fa-info-circle"></i></a>
 						<a th:href="@{/eliminar/{id}(id=${emp.employeeId})}" class="btn btn-danger mr-2"><i class="fas fa-trash"></i></a>
 					</td>
