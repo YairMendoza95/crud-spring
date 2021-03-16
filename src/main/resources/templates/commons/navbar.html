@@ -4,5 +4,7 @@
     	<a class="p-2 text-white" th:href="@{/}" >Empleados</a>
     	<a class="p-2 text-white" th:href="@{/usuarios}" sec:autorize="hasRole('ADMIN')">Usuarios</a>
     </nav>
-    <a class="btn btn-danger" th:href="@{/logout}">Salir</a>
+    <form class="d-flex" th:action="@{/logout}" method="post">
+         <button type="submit" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> 	Cerrar sesion</a>
+    </form>
 </div>

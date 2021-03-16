@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<meta charset="utf-8">
 	<title>Control de empleados</title>
+	<link rel="shortcut icon" th:href="@{/imgs/favicon.ico}">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
-		<link rel="icon" type="image/x-icon" href="/statics	/favicon.ico">
 </head>
 <body>
 	<div th:insert="commons/navbar.html :: div"></div>
@@ -16,7 +16,7 @@
                 <div class="row">
             	<h2 class="card-title col-md-9" th:inline="text">Bienvenido [[${#httpServletRequest.remoteUser}]]!</h2>
                     <div class="d-grid col-md-3">
-                        <a href="#" class="btn btn-success btn-block" data-bs-toggle="modal" data-bs-target="#addEmployee" >
+                        <a href="#" class="btn btn-success btn-block" data-bs-toggle="modal" data-bs-target="#addEmployee" sec:authoriza="hasAuthority('ADMIN')">
                             <i class="fas fa-plus"></i> Agregar empleado
                         </a>
                         <div th:insert="./employees/add_employee.html :: div"></div>
