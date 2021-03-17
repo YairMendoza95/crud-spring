@@ -34,6 +34,7 @@ public class IndexController {
 
 	@GetMapping("/")
 	public String index(Model model) {
+		model.addAttribute("title", "Control de empleados");
 		model.addAttribute("departments", departmentService.getAllDepartments());
 		model.addAttribute("jobs", jobService.getAllJobs());
 		model.addAttribute("employees", employeeService.getAllEmployees());

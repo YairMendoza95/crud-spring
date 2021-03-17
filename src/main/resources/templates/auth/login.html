@@ -4,6 +4,7 @@
 
 <body>
 	<header th:replace="commons/layout :: header"></header>
+	
   	<div class="container">
 		<div th:if="${msj != null}" class="alert alert-success" role="alert" th:text="${msj}"></div>
   		<section class="row justify-content-center">
@@ -38,6 +39,7 @@
 		  	</form>
   		</section>
   	</div>
+  	
   	<footer th:replace="commons/layout :: footer"></footer>
 </body>
 </html>

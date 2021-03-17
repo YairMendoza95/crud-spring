@@ -13,9 +13,10 @@
 			<h5 class="my-0 mr-md-auto font-weight-normal text-white">Control de empleados</h5>
     		<nav class="my-2 my-md-0 mr-md-3" sec:authorize="isAuthenticated()">
     			<a class="p-2 text-white" th:href="@{/}" sec:authorize="hasAuthority('ADMIN')">Empleados</a>
-    			<a class="p-2 text-white" th:href="@{/usuarios/}">Usuarios</a>
+    			<a class="p-2 text-white" th:href="@{/usuarios/}" sec:authorize="hasAuthority('ADMIN')">Usuarios</a>
     		</nav>
-	    	<form class="d-flex" th:action="@{/logout}" method="post">
+    		<a class="btn btn-success" th:href="@{/login}" sec:authorize="!isAuthenticated()"><i class="fas fa-sign-out-alt"></i> Entrar</a>
+	    	<form class="d-flex" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
 	       		<button type="submit" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i> Cerrar sesion</button>
 	    	</form>
 		</div>
