@@ -33,9 +33,9 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/static/**", "/imgs/**").permitAll()
-				.antMatchers("/login", "/register", "/error", "/", "/usuarios/nuevo").permitAll().antMatchers("/")
-				.hasAnyAuthority("ADMIN", "USER").antMatchers("/editar/**", "/eliminar/**").hasAnyAuthority("ADMIN")
-				.anyRequest().authenticated().and().formLogin().loginPage("/login").failureUrl("/error").permitAll()
-				.and().logout().permitAll();
+				.antMatchers("/login", "/signup", "/error", "/", "/register").permitAll().antMatchers("/")
+				.hasAnyAuthority("ADMIN", "USER").antMatchers("/editar/**", "/eliminar/**", "/usuarios/**")
+				.hasAnyAuthority("ADMIN").anyRequest().authenticated().and().formLogin().loginPage("/login")
+				.failureUrl("/error").permitAll().and().logout().permitAll();
 	}
 }
