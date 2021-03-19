@@ -3,6 +3,7 @@ package com.indra.bbva.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,9 @@ public class UsuarioController {
 	@Autowired
 	private RolService rolService;
 
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
+
 	private final static Logger LOG = LoggerFactory.getLogger(UsuarioController.class);
 
 	@GetMapping("")
@@ -44,9 +48,28 @@ public class UsuarioController {
 		return "users/edit_user";
 	}
 
+	@GetMapping("/crear")
+	public String crear(UsuarioBean user, Model model) {
+		model.addAttribute("title", "Crear usuario");
+		return "users/add_user_auth";
+	}
+
 	@PostMapping("/guardar")
 	public String guardar(UsuarioBean user, RolBean rol, RedirectAttributes attributes) {
-		if (usuarioService.updateUser(user) && rolService.saveRole(rol)) {
+		user.setClave(bcrypt.encode(user.getClave()));
+		if (usuarioService.updateUser(user) && rolService.updateRole(rol)) {
+			attributes.addFlashAttribute("msj", "Usuario actualizado");
+			return "redirect:/usuarios";
+		} else {
+			attributes.addFlashAttribute("msj", "Usuario no actilizado");
+			return "redirect:/usuarios";
+		}
+	}
+
+	@PostMapping("/nuevo")
+	public String nuevo(UsuarioBean user, RolBean rol, RedirectAttributes attributes) {
+		user.setClave(bcrypt.encode(user.getClave()));
+		if (usuarioService.saveUser(user) && rolService.saveRole(rol)) {
 			attributes.addFlashAttribute("msj", "Usuario actualizado");
 			return "redirect:/usuarios";
 		} else {
