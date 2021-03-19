@@ -71,8 +71,10 @@ public class IndexController {
 	@GetMapping("/{id}")
 	public String detalles(@PathVariable("id") Integer employeeId, Model model) {
 		EmployeeBean employee = employeeService.findEmployeeByid(new EmployeeBean(employeeId));
+
 		model.addAttribute("title", "Detalle de empleado");
 		model.addAttribute("employee", employee);
+
 		if (employee.getManagerId() != null)
 			model.addAttribute("gerente", employeeService.findEmployeeByid(new EmployeeBean(employee.getManagerId())));
 

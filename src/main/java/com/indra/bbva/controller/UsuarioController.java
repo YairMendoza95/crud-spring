@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.indra.bbva.model.RolBean;
 import com.indra.bbva.model.UsuarioBean;
+import com.indra.bbva.service.RolService;
 import com.indra.bbva.service.UsuarioService;
 
 @Controller
@@ -18,6 +21,9 @@ import com.indra.bbva.service.UsuarioService;
 public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
+
+	@Autowired
+	private RolService rolService;
 
 	private final static Logger LOG = LoggerFactory.getLogger(UsuarioController.class);
 
@@ -30,12 +36,29 @@ public class UsuarioController {
 
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable("id") String id, Model model) {
+		UsuarioBean user = usuarioService.findUserByid(new UsuarioBean(id));
+
 		model.addAttribute("title", "Editar usuario");
+		model.addAttribute("user", user);
+
 		return "users/edit_user";
 	}
 
 	@PostMapping("/guardar")
-	public String guardar(UsuarioBean user) {
-		return "";
+	public String guardar(UsuarioBean user, RolBean rol, RedirectAttributes attributes) {
+		if (usuarioService.updateUser(user) && rolService.saveRole(rol)) {
+			attributes.addFlashAttribute("msj", "Usuario actualizado");
+			return "redirect:/usuarios";
+		} else {
+			attributes.addFlashAttribute("msj", "Usuario no actilizado");
+			return "redirect:/usuarios";
+		}
+	}
+
+	@GetMapping("/eliminar/{id}")
+	public String eliminar(@PathVariable("id") String id, Model model) {
+		rolService.deleteRole(new RolBean(id));
+		usuarioService.deleteUser(new UsuarioBean(id));
+		return "redirect:/usuarios";
 	}
 }

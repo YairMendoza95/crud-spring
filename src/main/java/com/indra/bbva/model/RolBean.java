@@ -18,6 +18,10 @@ public class RolBean {
 	public RolBean() {
 	}
 
+	public RolBean(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+
 	public RolBean(String nombreUsuario, String rol) {
 		this.nombreUsuario = nombreUsuario;
 		this.rol = rol;

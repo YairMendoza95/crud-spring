@@ -27,6 +27,10 @@ public class UsuarioBean {
 	public UsuarioBean() {
 	}
 
+	public UsuarioBean(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+
 	public UsuarioBean(String nombreUsuario, String clave, String email, String telefono) {
 		this.nombreUsuario = nombreUsuario;
 		this.clave = clave;
