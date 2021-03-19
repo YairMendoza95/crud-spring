@@ -3,6 +3,7 @@ package com.indra.bbva.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +24,9 @@ public class UsuarioBean {
 
 	@Column(name = "ACTIVO")
 	private Integer activo;
+
+	@OneToOne(mappedBy = "user")
+	private RolBean rol;
 
 	public UsuarioBean() {
 	}
@@ -86,10 +90,18 @@ public class UsuarioBean {
 		this.activo = activo;
 	}
 
+	public RolBean getRol() {
+		return rol;
+	}
+
+	public void setRol(RolBean rol) {
+		this.rol = rol;
+	}
+
 	@Override
 	public String toString() {
-		return "UserBean [nombreUsuario=" + nombreUsuario + ", clave=" + clave + ", email=" + email + ", telefono="
-				+ telefono + ", activo=" + activo + "]";
+		return "UsuarioBean [nombreUsuario=" + nombreUsuario + ", clave=" + clave + ", email=" + email + ", telefono="
+				+ telefono + ", activo=" + activo + ", rol=" + rol + "]";
 	}
 
 }
