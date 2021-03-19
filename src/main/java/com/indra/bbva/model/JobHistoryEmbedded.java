@@ -4,13 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class JobHistoryEmbedded implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Column(name = "EMPLOYEE_ID")
 	private Integer employeeId;
+
+	@Column(name = "START_DATE")
 	private Date startDate;
 
 	public JobHistoryEmbedded() {
