@@ -59,6 +59,7 @@ public class IndexController {
 
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable("id") Integer employeeId, Model model) {
+		model.addAttribute("title", "Editar empleado");
 		model.addAttribute("empl", employeeService.findEmployeeByid(new EmployeeBean(employeeId)));
 		model.addAttribute("jobs", jobService.getAllJobs());
 		model.addAttribute("departments", departmentService.getAllDepartments());
@@ -70,6 +71,7 @@ public class IndexController {
 	@GetMapping("/{id}")
 	public String detalles(@PathVariable("id") Integer employeeId, Model model) {
 		EmployeeBean employee = employeeService.findEmployeeByid(new EmployeeBean(employeeId));
+		model.addAttribute("title", "Detalle de empleado");
 		model.addAttribute("employee", employee);
 		if (employee.getManagerId() != null)
 			model.addAttribute("gerente", employeeService.findEmployeeByid(new EmployeeBean(employee.getManagerId())));
@@ -84,6 +86,12 @@ public class IndexController {
 		} else {
 			return "commons/error";
 		}
+	}
+
+	@GetMapping("/403")
+	public String accesoDenagado(Model model) {
+		model.addAttribute("title", "Acceso denegado");
+		return "commons/denied";
 	}
 
 	@InitBinder()

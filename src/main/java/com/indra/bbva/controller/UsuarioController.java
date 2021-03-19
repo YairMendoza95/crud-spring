@@ -21,15 +21,17 @@ public class UsuarioController {
 
 	private final static Logger LOG = LoggerFactory.getLogger(UsuarioController.class);
 
-	@GetMapping("/")
-	public String usuarios(Model model) {
+	@GetMapping("")
+	public String index(Model model) {
 		model.addAttribute("usuarios", usuarioService.getAllUsers());
+		model.addAttribute("title", "Usuarios");
 		return "users/usuarios";
 	}
 
-	@GetMapping("/edit/{id}")
-	public String editar(@PathVariable("id") String id) {
-		return "";
+	@GetMapping("/editar/{id}")
+	public String editar(@PathVariable("id") String id, Model model) {
+		model.addAttribute("title", "Editar usuario");
+		return "users/edit_user";
 	}
 
 	@PostMapping("/guardar")

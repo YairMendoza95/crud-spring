@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-	<meta charset="utf-8">
-	<title>Control de empleados</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<script src="https://kit.fontawesome.com/3a9fc5cf36.js" crossorigin="anonymous"></script>
-</head>
+<head th:replace="commons/layout :: head"></head>
 <body>
-	<div th:insert="commons/navbar.html :: div"></div>
+	<header th:replace="commons/layout :: header"></header>
 	<section class="py-4 mb-4 bg-light">
 		<div class="container">
 			<div class="row">
@@ -39,15 +33,13 @@
 					<td th:text="${user.email}"></td>
 					<td th:text="${user.telefono}"></td>
 					<td>
-						<a href="@{/editar/{id}(id=${user.nombreUsuario})}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
-						<a href="" class="btn btn-warning mr-2"><i class="fas fa-info-circle"></i></a>
+						<a th:href="@{/usuarios/editar/{id}(id=${user.nombreUsuario})}" class="btn btn-info mr-2"><i class="fas fa-edit"></i></a>
 						<a href="@{/eliminar/{id}(id=${user.nombreUsuario})}" class="btn btn-danger mr-2"><i class="fas fa-trash"></i></a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" 
-		integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+	<footer th:replace="commons/layout :: footer"></footer>
 </body>
 </html>
