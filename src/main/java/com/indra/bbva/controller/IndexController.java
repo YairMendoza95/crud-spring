@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.indra.bbva.model.EmployeeBean;
 import com.indra.bbva.service.DepartmentService;
 import com.indra.bbva.service.EmployeeService;
+import com.indra.bbva.service.JobHistoryService;
 import com.indra.bbva.service.JobService;
 
 @Controller
@@ -31,6 +32,9 @@ public class IndexController {
 
 	@Autowired
 	private JobService jobService;
+
+	@Autowired
+	private JobHistoryService jhs;
 
 	@GetMapping("/")
 	public String index(Model model) {

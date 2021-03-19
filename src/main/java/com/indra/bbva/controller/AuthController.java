@@ -32,15 +32,16 @@ public class AuthController {
 		return "auth/login";
 	}
 
-	@GetMapping("/error")
-	public String error() {
-		return "";
-	}
-
 	@GetMapping("/signup")
 	public String signup(Model model) {
 		model.addAttribute("title", "Crear cuenta");
 		return "auth/register";
+	}
+
+	@GetMapping("/login-error")
+	public String loginError(RedirectAttributes model) {
+		model.addFlashAttribute("loginError", true);
+		return "redirect:/login";
 	}
 
 	@PostMapping("/register")
@@ -48,19 +49,16 @@ public class AuthController {
 		String mensaje = "";
 		usuario.setClave(bcrypt.encode(usuario.getClave()));
 		usuario.setActivo(1);
-		LOG.info(usuario.toString());
-		try {
-			if (usuarioService.saveUser(usuario)) {
-				mensaje = "Usuario creado";
-				attribute.addFlashAttribute("msj", mensaje);
-				return "redirect:/login";
-			} else {
-				mensaje = "No se pudo crear el usuario";
-				attribute.addFlashAttribute("msj", mensaje);
-				return "redirect:/register";
-			}
-		} catch (Exception e) {
-			return "./commons/error";
+
+		if (usuarioService.saveUser(usuario)) {
+			mensaje = "Usuario creado";
+			attribute.addFlashAttribute("msj", mensaje);
+			return "redirect:/login";
+		} else {
+			mensaje = "No se pudo crear el usuario";
+			attribute.addFlashAttribute("msj", mensaje);
+			return "redirect:/register";
 		}
+
 	}
 }

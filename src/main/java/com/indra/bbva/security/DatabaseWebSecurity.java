@@ -33,10 +33,10 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers("/static/**", "/imgs/**").permitAll()
-				.antMatchers("/login", "/signup", "/error", "/", "/register").permitAll().antMatchers("/")
+				.antMatchers("/login", "/signup", "/login-error", "/", "/register").permitAll().antMatchers("/")
 				.hasAnyAuthority("ADMIN", "USER").antMatchers("/editar/**", "/eliminar/**", "/usuarios/**")
 				.hasAnyAuthority("ADMIN").anyRequest().authenticated().and().exceptionHandling()
-				.accessDeniedPage("/403").and().formLogin().loginPage("/login").failureUrl("/error").permitAll().and()
-				.logout().permitAll();
+				.accessDeniedPage("/403").and().formLogin().loginPage("/login").failureUrl("/login-error").permitAll()
+				.and().logout().permitAll();
 	}
 }
